@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Loan Calculator</title>
+</head>
+<body>
+    <h1>Car Loan Calculator</h1>
+    <form method="post">
+        <label>Loan Amount ($):</label><br>
+        <input type="number" name="principal" step="0.01" required><br><br>
+
+        <label>Annual Interest Rate (%):</label><br>
+        <input type="number" name="rate" step="0.01" required><br><br>
+
+        <label>Loan Term (Years):</label><br>
+        <input type="number" name="years" required><br><br>
+
+        <button type="submit">Calculate</button>
+    </form>
+
+    {% if result %}
+        <h2>Monthly Payment: ${{ result }}</h2>
+    {% endif %}
+</body>
+</html>
