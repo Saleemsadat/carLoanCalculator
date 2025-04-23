@@ -8,11 +8,14 @@ def calculate():
     if request.method == 'POST':
         principal = float(request.form['principal'])
         down_payment = float(request.form['down_payment'])
+        tax_rate = float(request.form['tax_rate']) / 100
         rate = float(request.form['rate']) / 100 / 12
         years = int(request.form['years'])
         months = years * 12
 
-        loan_amount = principal - down_payment
+        tax = principal * tax_rate
+        total_price_with_tax = principal + tax
+        loan_amount = total_price_with_tax - down_payment
 
         if rate == 0:
             monthly_payment = loan_amount / months
@@ -26,3 +29,4 @@ def calculate():
         )
 
     return render_template('index.html')
+
