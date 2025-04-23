@@ -19,6 +19,10 @@ def calculate():
         else:
             monthly_payment = loan_amount * rate * (1 + rate)**months / ((1 + rate)**months - 1)
 
-        return render_template('index.html', result=round(monthly_payment, 2))
+        return render_template(
+            'index.html',
+            result=round(monthly_payment, 2),
+            loan_amount=round(loan_amount, 2)
+        )
 
     return render_template('index.html')
