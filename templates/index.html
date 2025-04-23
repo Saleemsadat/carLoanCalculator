@@ -68,23 +68,23 @@
     <h1>Car Loan Calculator</h1>
 
     <form method="post">
-        <label>Loan Amount ($):</label>
-        <input type="number" name="principal" step="0.01" required>
+    <label>Loan Amount ($):</label>
+    <input type="number" name="principal" step="0.01" required>
 
-        <label>Down Payment ($):</label>
-        <input type="number" name="down_payment" step="0.01" value="0" required>
+    <label>Down Payment ($):</label>
+    <input type="number" name="down_payment" step="0.01" value="0" required>
 
-        <label>Tax Rate (%):</label>
-        <input type="number" name="tax_rate" step="0.01" value="0" required>
+    <label>Tax Rate (%):</label>
+    <input type="number" name="tax_rate" step="0.01" value="0" required>
 
-        <label>Annual Interest Rate (%):</label>
-        <input type="number" name="rate" step="0.01" required>
+    <label>Annual Interest Rate (%):</label>
+    <input type="number" name="rate" step="0.01" required>
 
-        <label>Loan Term (Years):</label>
-        <input type="number" name="years" required>
+    <label>Loan Term (Years):</label>
+    <input type="number" name="years" required>
 
-        <button type="submit">Calculate</button>
-    </form>
+    <button type="submit">Calculate</button>
+</form>
 
     {% if result %}
     <div class="result">
