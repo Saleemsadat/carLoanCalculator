@@ -67,15 +67,15 @@
 <body>
     <h1>Car Loan Calculator</h1>
 
-    <form method="post">
-    <label>Loan Amount ($):</label>
+   <form method="post">
+    <label>Vehicle Price ($):</label>
     <input type="number" name="principal" step="0.01" required>
 
     <label>Down Payment ($):</label>
-    <input type="number" name="down_payment" step="0.01" value="0" required>
+    <input type="number" name="down_payment" step="0.01" required>
 
     <label>Tax Rate (%):</label>
-    <input type="number" name="tax_rate" step="0.01" value="0" required>
+    <input type="number" name="tax_rate" step="0.01" required>
 
     <label>Annual Interest Rate (%):</label>
     <input type="number" name="rate" step="0.01" required>
@@ -86,10 +86,19 @@
     <button type="submit">Calculate</button>
 </form>
 
-    {% if result %}
-    <div class="result">
-        <h2>Loan Amount After Down Payment: ${{ loan_amount }}</h2>
-        <h2>Monthly Payment: ${{ result }}</h2>
+
+    {% if result is not none %}
+    <div style="margin-top: 30px; padding: 15px; border: 1px solid #ccc; border-radius: 10px; background-color: #f9f9f9;">
+        <h3>Calculation Summary</h3>
+        <ul>
+            <li><strong>Vehicle Price:</strong> ${{ "{:,.2f}".format(principal) }}</li>
+            <li><strong>Down Payment:</strong> ${{ "{:,.2f}".format(down_payment) }}</li>
+            <li><strong>Tax Rate:</strong> {{ "{:.2f}".format(tax_rate) }}%</li>
+            <li><strong>Interest Rate:</strong> {{ "{:.2f}".format(rate) }}%</li>
+            <li><strong>Loan Term:</strong> {{ years }} years</li>
+            <li><strong>Total Loan Amount:</strong> ${{ "{:,.2f}".format(loan_amount) }}</li>
+            <li><strong>Monthly Payment:</strong> ${{ "{:,.2f}".format(result) }}</li>
+        </ul>
     </div>
 {% endif %}
 </body>
