@@ -33,7 +33,16 @@ def calculate():
             years=years
         )
 
-    return render_template('index.html')
+    return render_template(
+        'index.html',
+        result=None,
+        loan_amount=None,
+        principal=None,
+        down_payment=None,
+        tax_rate=None,
+        rate=None,
+        years=None
+    )
 
 # 🔥 This is the important part!
 if __name__ == '__main__':
