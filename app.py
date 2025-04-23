@@ -30,3 +30,6 @@ def calculate():
 
     return render_template('index.html')
 
+# 🔥 This is the important part!
+if __name__ == '__main__':
+    app.run(debug=True)
