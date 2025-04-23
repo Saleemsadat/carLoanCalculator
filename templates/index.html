@@ -2,24 +2,88 @@
 <html>
 <head>
     <title>Car Loan Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        form {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            width: 100%;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .result {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #dff0d8;
+            border: 1px solid #d0e9c6;
+            border-radius: 8px;
+            color: #3c763d;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <h1>Car Loan Calculator</h1>
+
     <form method="post">
-        <label>Loan Amount ($):</label><br>
-        <input type="number" name="principal" step="0.01" required><br><br>
+        <label>Loan Amount ($):</label>
+        <input type="number" name="principal" step="0.01" required>
 
-        <label>Annual Interest Rate (%):</label><br>
-        <input type="number" name="rate" step="0.01" required><br><br>
+        <label>Annual Interest Rate (%):</label>
+        <input type="number" name="rate" step="0.01" required>
 
-        <label>Loan Term (Years):</label><br>
-        <input type="number" name="years" required><br><br>
+        <label>Loan Term (Years):</label>
+        <input type="number" name="years" required>
 
         <button type="submit">Calculate</button>
     </form>
 
     {% if result %}
-        <h2>Monthly Payment: ${{ result }}</h2>
+        <div class="result">
+            <h2>Monthly Payment: ${{ result }}</h2>
+        </div>
     {% endif %}
 </body>
 </html>
