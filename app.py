@@ -10,45 +10,35 @@ def clean_currency(value):
 def calculate():
     if request.method == "POST":
         try:
-            # Clean and parse values
-            principal = clean_currency(request.form["principal"])
+            price = clean_currency(request.form["price"])
             down_payment = clean_currency(request.form["down_payment"])
             tax_rate = float(request.form["tax_rate"])
             rate = float(request.form["rate"])
             years = int(request.form["years"])
 
-            # Apply tax to vehicle price
-            tax_amount = principal * (tax_rate / 100)
-            total_with_tax = principal + tax_amount
+            tax_amount = (price - down_payment) * (tax_rate / 100)
+            loan_amount = price - down_payment + tax_amount
 
-            # Subtract down payment
-            loan_amount = total_with_tax - down_payment
-
-            # Monthly interest rate
-            monthly_rate = rate / 100 / 12
-            months = years * 12
-
-            # Monthly payment formula
-            if monthly_rate == 0:
-                monthly_payment = loan_amount / months
-            else:
-                monthly_payment = loan_amount * (monthly_rate * (1 + monthly_rate) ** months) / ((1 + monthly_rate) ** months - 1)
-
-            return render_template(
-                "index.html",
-                monthly_payment=monthly_payment,
-                principal=principal,
-                down_payment=down_payment,
-                tax_rate=tax_rate,
-                rate=rate,
-                years=years,
-                loan_amount=loan_amount,
-                tax_amount=tax_amount,
+            monthly_interest_rate = rate / 100 / 12
+            number_of_payments = years * 12
+            monthly_payment = (
+                loan_amount * monthly_interest_rate /
+                (1 - (1 + monthly_interest_rate) ** -number_of_payments)
             )
-        except Exception as e:
-            return f"An error occurred: {str(e)}"
 
-    return render_template("index.html")
+            return render_template("index.html",
+                                   principal=price,
+                                   down_payment=down_payment,
+                                   tax_rate=tax_rate,
+                                   tax_amount=tax_amount,
+                                   loan_amount=loan_amount,
+                                   rate=rate,
+                                   years=years,
+                                   monthly_payment=monthly_payment)
+        except Exception as e:
+            return f"An error occurred: {e}", 400
+    else:
+        return render_template("index.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
